@@ -77,7 +77,7 @@ double R_Zero, R_PosInf, R_NegInf, R_Nan;
 struct redisServer server; /* server global state */
 
 /* Our command table.
- *
+ * ÃüÁîĞĞ±í
  * Every entry is composed of the following fields:
  *
  * name: a string representing the command name.
