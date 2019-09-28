@@ -387,7 +387,9 @@ err:
 }
 #endif
 
-/* Return the UNIX time in microseconds */
+/* ∑µªÿ∫¡√Î
+ * Return the UNIX time in microseconds 
+ */
 PORT_LONGLONG ustime(void) {
     struct timeval tv;
     PORT_LONGLONG ust;
@@ -398,7 +400,9 @@ PORT_LONGLONG ustime(void) {
     return ust;
 }
 
-/* Return the UNIX time in milliseconds */
+/* ∑µªÿŒ¢√Î
+ * Return the UNIX time in milliseconds 
+ */
 PORT_LONGLONG mstime(void) {
     return ustime()/1000;
 }
