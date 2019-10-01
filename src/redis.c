@@ -77,7 +77,7 @@ double R_Zero, R_PosInf, R_NegInf, R_Nan;
 struct redisServer server; /* server global state */
 
 /* Our command table.
- * �����б�
+ * 命令行表
  * Every entry is composed of the following fields:
  *
  * name: a string representing the command name.
@@ -387,7 +387,7 @@ err:
 }
 #endif
 
-/* ���غ���
+/* 返回毫秒
  * Return the UNIX time in microseconds 
  */
 PORT_LONGLONG ustime(void) {
@@ -400,7 +400,7 @@ PORT_LONGLONG ustime(void) {
     return ust;
 }
 
-/* ����΢��
+/* 返回微秒
  * Return the UNIX time in milliseconds 
  */
 PORT_LONGLONG mstime(void) {
@@ -420,7 +420,7 @@ void exitFromChild(int retcode) {
 }
 
 /*====================== Hash table type implementation  ==================== */
-
+//基于sds和redis对象的哈希表实现
 /* This is a hash table type that uses the SDS dynamic strings library as
  * keys and redis objects as values (objects can hold SDS strings,
  * lists, sets). */
@@ -437,6 +437,7 @@ void dictListDestructor(void *privdata, void *val)
     listRelease((list*)val);
 }
 
+//其实就是调用sds封装的比较函数进行对比
 int dictSdsKeyCompare(void *privdata, const void *key1,
         const void *key2)
 {
