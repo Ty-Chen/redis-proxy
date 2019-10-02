@@ -431,6 +431,7 @@ void dictVanillaFree(void *privdata, void *val)
     zfree(val);
 }
 
+//链表析构
 void dictListDestructor(void *privdata, void *val)
 {
     DICT_NOTUSED(privdata);
@@ -450,8 +451,10 @@ int dictSdsKeyCompare(void *privdata, const void *key1,
     return memcmp(key1, key2, l1) == 0;
 }
 
-/* A case insensitive version used for the command lookup table and other
- * places where case insensitive non binary-safe comparison is needed. */
+/* 大小写不敏感sds比较函数
+ * A case insensitive version used for the command lookup table and other
+ * places where case insensitive non binary-safe comparison is needed. 
+ */
 int dictSdsKeyCaseCompare(void *privdata, const void *key1,
         const void *key2)
 {
@@ -460,6 +463,7 @@ int dictSdsKeyCaseCompare(void *privdata, const void *key1,
     return strcasecmp(key1, key2) == 0;
 }
 
+//redis对象析构
 void dictRedisObjectDestructor(void *privdata, void *val)
 {
     DICT_NOTUSED(privdata);
@@ -468,6 +472,7 @@ void dictRedisObjectDestructor(void *privdata, void *val)
     decrRefCount(val);
 }
 
+//sds对象析构
 void dictSdsDestructor(void *privdata, void *val)
 {
     DICT_NOTUSED(privdata);
@@ -475,6 +480,7 @@ void dictSdsDestructor(void *privdata, void *val)
     sdsfree(val);
 }
 
+//字典对象比较：根据key获取对象再调用比较函数进行比较
 int dictObjKeyCompare(void *privdata, const void *key1,
         const void *key2)
 {
