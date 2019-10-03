@@ -488,19 +488,23 @@ int dictObjKeyCompare(void *privdata, const void *key1,
     return dictSdsKeyCompare(privdata,o1->ptr,o2->ptr);
 }
 
+//根据key获取object的哈希值
 unsigned int dictObjHash(const void *key) {
     const robj *o = key;
     return dictGenHashFunction(o->ptr, (int)sdslen((sds)o->ptr));               WIN_PORT_FIX /* cast (int) */
 }
 
+//获取sds的哈希值
 unsigned int dictSdsHash(const void *key) {
     return dictGenHashFunction((unsigned char*)key, (int)sdslen((char*)key));   WIN_PORT_FIX /* cast (int) */
 }
 
+//针对大小写不敏感sds单独计算
 unsigned int dictSdsCaseHash(const void *key) {
     return dictGenCaseHashFunction((unsigned char*)key, (int)sdslen((char*)key)); WIN_PORT_FIX /* cast (int) */
 }
 
+//针对编码后的object进行比较
 int dictEncObjKeyCompare(void *privdata, const void *key1,
         const void *key2)
 {
@@ -519,6 +523,7 @@ int dictEncObjKeyCompare(void *privdata, const void *key1,
     return cmp;
 }
 
+//对编码的object取哈希值
 unsigned int dictEncObjHash(const void *key) {
     robj *o = (robj*) key;
 
