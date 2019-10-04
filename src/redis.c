@@ -547,7 +547,9 @@ unsigned int dictEncObjHash(const void *key) {
     }
 }
 
-/* Sets type hash table */
+/* 设置哈希表
+ * Sets type hash table 
+ */
 dictType setDictType = {
     dictEncObjHash,            /* hash function */
     NULL,                      /* key dup */
@@ -557,7 +559,9 @@ dictType setDictType = {
     NULL                       /* val destructor */
 };
 
-/* Sorted sets hash (note: a skiplist is used in addition to the hash table) */
+/* 设置有序哈希表，采用压缩链表
+ * Sorted sets hash (note: a skiplist is used in addition to the hash table) 
+ */
 dictType zsetDictType = {
     dictEncObjHash,            /* hash function */
     NULL,                      /* key dup */
