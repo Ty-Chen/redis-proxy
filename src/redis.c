@@ -559,7 +559,7 @@ dictType setDictType = {
     NULL                       /* val destructor */
 };
 
-/* 设置有序哈希表，采用压缩链表
+/* 设置有序哈希表，采用跳跃链表
  * Sorted sets hash (note: a skiplist is used in addition to the hash table) 
  */
 dictType zsetDictType = {
@@ -678,6 +678,7 @@ dictType replScriptCacheDictType = {
     NULL                        /* val destructor */
 };
 
+//若字典过大则返回假，便于重新分配大小
 int htNeedsResize(dict *dict) {
     PORT_LONGLONG size, used;
 
