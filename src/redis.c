@@ -688,7 +688,8 @@ int htNeedsResize(dict *dict) {
             (used*100/size < REDIS_HT_MINFILL));
 }
 
-/* If the percentage of used slots in the HT reaches REDIS_HT_MINFILL
+/* 当使用的槽数达到条件则重新分配以节约内存
+ * If the percentage of used slots in the HT reaches REDIS_HT_MINFILL
  * we resize the hash table to save memory */
 void tryResizeHashTables(int dbid) {
     if (htNeedsResize(server.db[dbid].dict))
@@ -697,7 +698,8 @@ void tryResizeHashTables(int dbid) {
         dictResize(server.db[dbid].expires);
 }
 
-/* Our hash table implementation performs rehashing incrementally while
+/* 实现自增rehash，主要包括检测dict是否需要自增以及是否超时(expire)
+ * Our hash table implementation performs rehashing incrementally while
  * we write/read from the hash table. Still if the server is idle, the hash
  * table will use two tables for a long time. So we try to use 1 millisecond
  * of CPU time at every call of this function to perform some rehahsing.
