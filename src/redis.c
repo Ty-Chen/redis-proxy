@@ -720,7 +720,8 @@ int incrementallyRehash(int dbid) {
     return 0;
 }
 
-/* This function is called once a background process of some kind terminates,
+/* 当进程结束时，调用此函数避免rehash
+ * This function is called once a background process of some kind terminates,
  * as we want to avoid resizing the hash tables when there is a child in order
  * to play well with copy-on-write (otherwise when a resize happens lots of
  * memory pages are copied). The goal of this function is to update the ability
